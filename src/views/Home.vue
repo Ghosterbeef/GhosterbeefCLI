@@ -138,7 +138,7 @@ const addRecord = (text, spacer = true) => {
 };
 
 const displayGreetings = () => {
-  addRecord(`Вас приветствует веб-интерфейс GhosterbeefCLI. Напишите help, чтобы узнать, что я мгу для вас сделать.`);
+  addRecord(`Вас приветствует веб-интерфейс GhosterbeefCLI. Напишите help, чтобы узнать, что я могу для вас сделать.`);
 };
 
 const displayVersion = () => {
