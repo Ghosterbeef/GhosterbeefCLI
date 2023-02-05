@@ -3,8 +3,9 @@
     <div class="cli__body">
       <p
         class="cli__body__record"
-        v-for="record in cli"
+        v-for="record in store.cli"
         :key="record.id"
+        ref="cliRecords"
       >
         {{ record.text }}
       </p>
@@ -32,135 +33,24 @@
   </section>
 </template>
 
-<script setup>
-import { onMounted, onUnmounted, reactive, ref } from "vue";
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useStore } from "@/stores/cli";
-import { useDeclensionWordByNumber } from "@/composables/declensionWord";
+import type { Ref } from "vue";
 
 const store = useStore();
-const cli = reactive([]);
-const history = reactive([]);
 const historyIndex = ref(-1);
 const userInputValue = ref("");
-const userInput = ref(null);
-
-const commands = {
-  help() {
-    const text = `Вы можете использовать следующие методы:
-version            Отображает текущую версию CLI
-whois              Отображает информацию о создателе
-skills             Отображает инофрмацию об умениях
-copyright          Отображает информацию о правах на использование
-projects           Отображает информацию о моих проектах
-experience         Отображает информацию об опыте работы
-localdatetime      Отображает текущие дату и время
-cls                Очистить окно консоли`;
-    addRecord(text);
-  },
-  version() {
-    displayVersion();
-  },
-  whois() {
-    const ageDifMs = Date.now() - new Date(2001, 4, 28).getTime();
-    const ageDate = new Date(ageDifMs);
-    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-
-    const text = `Ghosterbeef(Ghosteak) - мой цифровой псевдоним под которым вы можете найти меня в соцсетях и играх. На самом деле меня зовут Антон. Мне ${age} ${useDeclensionWordByNumber(age)}.
-Я Frontend разработчик, специализируюсь на разработке SPA (Одностраничных приложений) с помощью фреймворка Vue.js. Возможно вы найдете что-то полезное на моей странице в GitHub. (https://github.com/Ghosterbeef)
-Я безумно люблю Vue.js и разрабатывать пользовательские интерфейсы, но кроме этого я люблю играть в игры, (Battlefield 3 - 2042, Overwatch, Dying Light и т.д.), кушать вредную еду и являюсь заложником экосистемы Samsung 🆘.`;
-    addRecord(text);
-  },
-  skills() {
-    const text = `Технология/навый    Уровень владения
-HTML                100lvl
-CSS (SCSS)          100lvl
-JS                  Junior +
-D3.js               Прошу не надо 🥺
-Vue.js              Godlike ✌️
-Node.js             Hello world
-Nuxt.js             Ждем релиза Nuxt3
-Nativescript        Вам оно надо? 🙃
-React               😡
-React Native        🤬
-MySQL               select *?
-UI/UX               Консультант`;
-    addRecord(text);
-  },
-  copyright() {
-    displayCopyright();
-  },
-  experience() {
-    const text = `Компания        Время        Технология
-Joydev          3 месяца     Vue.js
-It-Pelag        2 месяца     Vue.js`;
-    addRecord(text);
-  },
-  projects() {
-    const text = `Все проекты, над которыми я работал:
-- AmfyStructures
-  (Завершен)     #vuejs:
-  Одностраничное веб - приложение, созданное Ghosterbeef, для изучения пользовательских структур для хранения данных и способов их визуализации в языке javascript.
-  (https://amfystructures.herokuapp.com/)
-- WidgetPortfolio
-  (Заморожен)    #vuejs:
-  Попытка создать приложение, позволяющее пользователю расширять функционал по мере необходимости. Проект временно заморожен.
-  (https://widgetportfolio.herokuapp.com/)
-- 4thYear
-  (Завершен)     #vuejs
-  Обностраничное приложение, созданное для размещения выполнений и отчетов по лабораторным работам 4го курса обучения.
-  (https://thyear-3e949.web.app/)
-- Агрегатор
-  (В разработке) #vuejs #nodejs:
-  Дипломный проект, разрабатываемый Ghosterbeef (Front-end + Design) и ByAmfy (Back-end + Design). Проект предполагает реализацию сервиса-агрегатора, включающего в себя интернет-магазин игрушек и сервис по бронированию размещения в гостиннице.
-  (https://vvv-holding-home.web.app/)`;
-    addRecord(text);
-  },
-  localdatetime() {
-    const text = new Date().toLocaleString();
-    addRecord(text);
-  },
-  cls() {
-    cli.length = 0;
-  },
-  _notFound(command) {
-    const text = `Неизвестная команда ${command}. Используйте команду 'help', чтобы отобразить все доступные методы CLI.`;
-    addRecord(text);
-  }
-};
-
-const addRecord = (text, spacer = true) => {
-  cli.push({
-    id: Math.random(),
-    text: text
-  });
-  if (!spacer) return;
-  cli.push({ id: Math.random(), text: " " });
-};
-
-const displayGreetings = () => {
-  addRecord(`Вас приветствует веб-интерфейс GhosterbeefCLI. Напишите help, чтобы узнать, что я могу для вас сделать.`);
-};
-
-const displayVersion = () => {
-  addRecord(`GhosterbeefCLI [Version ${store.version}]`, false);
-};
-
-const displayCopyright = () => {
-  addRecord(`Ghosterbeef (Ghosteak). Все права защищены.`, false);
-};
+const cliRecords = ref<null | Ref<HTMLElement[]>>(null);
+const userInput = ref<null | HTMLTextAreaElement>(null);
 
 const onEnterPressed = () => {
-  addRecord(`${store.prefix} ${userInputValue.value}`, false);
-  if (userInputValue.value) {
-    history.push(userInputValue.value);
-    if (!(userInputValue.value in commands)) {
-      commands._notFound(userInputValue.value);
-    } else {
-      commands[userInputValue.value]?.();
-    }
-  }
+  store.addRecord(`${store.prefix} ${userInputValue.value}`, false);
+  const trigger = userInputValue.value;
   userInputValue.value = "";
   historyIndex.value = -1;
+  if (!trigger) return;
+  store.actionCall(trigger);
 };
 
 const onEscPressed = () => {
@@ -169,44 +59,49 @@ const onEscPressed = () => {
 
 const onTabPressed = () => {
   if (!userInputValue.value) return;
-  const methods = Object.keys(commands);
-  const filteredMethods = methods.filter(key => key.startsWith(userInputValue.value));
-  userInputValue.value = filteredMethods[0] || userInputValue.value;
+  userInputValue.value = store.commandComplete(userInputValue.value);
 };
 
 const onUpPressed = () => {
-  if (!history.length) return;
+  if (!store.history.length) return;
   if (historyIndex.value === -1) {
-    historyIndex.value = history.length - 1;
+    historyIndex.value = store.history.length - 1;
   } else {
     historyIndex.value--;
   }
-  userInputValue.value = history[historyIndex.value];
+  userInputValue.value = store.historyRecord(historyIndex.value);
 };
 
 const onDownPressed = () => {
-  if (!history.length) return;
-  if (historyIndex.value === -1 || historyIndex.value > history.length) {
+  if (!store.history.length) return;
+  if (historyIndex.value === -1 || historyIndex.value === store.history.length) {
     historyIndex.value = 0;
   } else {
     historyIndex.value++;
   }
-  userInputValue.value = history[historyIndex.value];
+  userInputValue.value = store.historyRecord(historyIndex.value);
 };
 
 const focusUserInput = () => {
-  userInput.value.focus();
+  userInput.value?.focus();
 };
 
 const onKeyDown = () => {
-  userInput.value.focus();
+  userInput.value?.focus();
 };
+
+watch(cliRecords, (val) => {
+  if (!val) return;
+
+  const last = val[val.length - 1];
+  if (!last) return;
+
+  last.scrollIntoView({ behavior: "smooth", block: "center" });
+}, { deep: true });
 
 onMounted(async () => {
   document.addEventListener("keydown", onKeyDown);
-  displayVersion();
-  displayCopyright();
-  displayGreetings();
+  store.initialRender();
 });
 
 onUnmounted(() => {
