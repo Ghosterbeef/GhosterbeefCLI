@@ -1,5 +1,5 @@
 import * as VOCABULARY from "@/data/vocabulary.json";
-import { version } from "../../package.json";
+import { version } from "./../package.json";
 import { useDatesDifference, useDeclensionWordByNumber, useRenderList } from "@/composables/cliRender";
 import type { State } from "@/stores/cli";
 
@@ -34,6 +34,10 @@ class CLICommand {
 
   get action() {
     return this.cb();
+  }
+
+  get one() {
+    return 1
   }
 }
 

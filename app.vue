@@ -1,22 +1,26 @@
 <template>
+  <TheHeader />
   <section class="cli__wrapper">
     <div class="cli__body">
       <p
-        class="cli__body__record"
         v-for="record in store.cli"
         :key="record.id"
         ref="cliRecords"
+        class="cli__body__record"
       >
         {{ record.text }}
       </p>
-      <div class="cli__body__user-input" @click="focusUserInput">
+      <div
+        class="cli__body__user-input"
+        @click="focusUserInput"
+      >
         <p>
           {{ store.prefix }}
           <textarea
-            autofocus
             ref="userInput"
-            class="background-input"
             v-model="userInputValue"
+            autofocus
+            class="background-input"
             @keydown.enter.prevent.stop="onEnterPressed"
             @keydown.esc.prevent.stop="onEscPressed"
             @keydown.tab.prevent.stop="onTabPressed"
@@ -34,9 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
-import { useStore } from "@/stores/cli";
-import type { Ref } from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
+import {useStore} from "@/stores/cli";
+import type {Ref} from "vue";
+import TheHeader from "~/components/TheHeader.vue";
 
 const store = useStore();
 const historyIndex = ref(-1);
@@ -74,7 +79,10 @@ const onUpPressed = () => {
 
 const onDownPressed = () => {
   if (!store.history.length) return;
-  if (historyIndex.value === -1 || historyIndex.value === store.history.length) {
+  if (
+    historyIndex.value === -1 ||
+    historyIndex.value === store.history.length
+  ) {
     historyIndex.value = 0;
   } else {
     historyIndex.value++;
@@ -90,18 +98,21 @@ const onKeyDown = () => {
   userInput.value?.focus();
 };
 
-watch(cliRecords, (val) => {
-  if (!val) return;
+watch(
+  cliRecords,
+  (val) => {
+    if (!val) return;
 
-  const last = val[val.length - 1];
-  if (!last) return;
+    const last = val[val.length - 1];
+    if (!last) return;
 
-  last.scrollIntoView({ behavior: "smooth", block: "center" });
-}, { deep: true });
+    last.scrollIntoView({behavior: "smooth", block: "center"});
+  },
+  {deep: true}
+);
 
 onMounted(async () => {
   document.addEventListener("keydown", onKeyDown);
-  store.initialRender();
 });
 
 onUnmounted(() => {

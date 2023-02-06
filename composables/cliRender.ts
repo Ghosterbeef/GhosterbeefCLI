@@ -1,5 +1,5 @@
-import type { Ref } from "vue";
-import { computed, isRef, ref } from "vue";
+import type {Ref} from "vue";
+import {computed, isRef, ref} from "vue";
 
 
 function useDeclensionWordByNumber(
@@ -27,8 +27,8 @@ function useDeclensionWordByNumber(
 
 function useRenderList(
   items: string[][] | Ref<string[][]>,
-  keyValueSeparator: string = ":",
-  listSeparator: string = ""
+  keyValueSeparator = ":",
+  listSeparator = ""
 ) {
   const itemsRef = isRef(items) ? items : ref(items);
 
@@ -68,4 +68,4 @@ function useDatesDifference(date1: Date, date2: Date) {
 }
 
 
-export { useRenderList, useDeclensionWordByNumber, useDatesDifference };
+export {useRenderList, useDeclensionWordByNumber, useDatesDifference};
