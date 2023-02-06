@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da961d16-444e-445c-928d-40d505d4c4d7" name="Changes" comment="cf deploy fix">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/cloudflare.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/cloudflare.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +93,17 @@
       <recent name="C:\Projects\test-nuxt-3\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.generate">
+  <component name="RunManager" selected="npm.build">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -125,6 +136,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.generate" />
         <item itemvalue="npm.preview" />
         <item itemvalue="npm.dev" />
@@ -141,7 +153,7 @@
       <updated>1675665983790</updated>
       <workItem from="1675665985679" duration="5384000" />
       <workItem from="1675672048506" duration="1935000" />
-      <workItem from="1675674013502" duration="2857000" />
+      <workItem from="1675674013502" duration="3067000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt 3 migration">
       <created>1675671354036</created>
@@ -185,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675676991779</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="cf deploy fix">
+      <created>1675677113499</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675677113499</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
