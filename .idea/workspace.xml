@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da961d16-444e-445c-928d-40d505d4c4d7" name="Changes" comment="cf deploy">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/cloudflare.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/cloudflare.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="da961d16-444e-445c-928d-40d505d4c4d7" name="Changes" comment="cf deploy fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +142,7 @@
       <updated>1675665983790</updated>
       <workItem from="1675665985679" duration="5384000" />
       <workItem from="1675672048506" duration="1935000" />
-      <workItem from="1675674013502" duration="2231000" />
+      <workItem from="1675674013502" duration="2485000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt 3 migration">
       <created>1675671354036</created>
@@ -166,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675676338623</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="cf deploy fix">
+      <created>1675676466229</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1675676466229</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +192,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nuxt 3 migration" />
     <MESSAGE value="cf deploy" />
-    <option name="LAST_COMMIT_MESSAGE" value="cf deploy" />
+    <MESSAGE value="cf deploy fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="cf deploy fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
